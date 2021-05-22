@@ -1,15 +1,12 @@
 import React, { useState } from "react";
-import { Radio, Select, Space, Typography, Button, Dropdown } from "antd";
-import { DownOutlined } from "@ant-design/icons";
-import "antd/dist/antd.css";
+import { Radio, Select, Space, Typography } from "antd";
 
-const Filter = () => {
-  const [status, setStatus] = useState("received");
+const Filter = ({ status, handleStatus }) => {
   const { Title } = Typography;
 
   const radio = (
     <Radio.Group
-      onChange={(e) => setStatus(e.target.value)}
+      onChange={(e) => handleStatus(e.target.value)}
       value={status}
       label="Status"
     >
@@ -29,7 +26,7 @@ const Filter = () => {
         <Select defaultValue="Adress" className="filterEl"></Select>
         <Select defaultValue="Date" className="filterEl"></Select>{" "}
         <Select defaultValue="Status" className="filterEl">
-            {radio}
+          {radio}
         </Select>
         <Select defaultValue="Group" className="filterEl"></Select>
         <Select defaultValue="Date Range" className="filterEl"></Select>
