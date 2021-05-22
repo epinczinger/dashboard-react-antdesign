@@ -13,6 +13,8 @@ function App() {
 
   const { Content, Sider } = Layout;
 
+  const SERVER_URL = 'http://localhost:3000/api/';
+
   const handleStatus = (status) => {
     setStatus(status);
   };
@@ -20,14 +22,35 @@ function App() {
     setDocName(status);
   };
 
+  const addDoc = () => {
+    const newDoc = {
+      status,
+      name: docName,
+      channel: 'somechannel',
+      group: 'somegroup',
+      date: 'someday',
+      type: 'sometype',
+      adress: 'somewhere',
+    };
+    axios
+      .post(`${SERVER_URL}documents`, newDoc)
+      .then((response) => {
+        setDocs([...docs, response.data]);
+      })
+      .catch((error) => console.warn(error));
+  };
+
   useEffect(() => {
     const fetchDocs = async () => {
       setLoading(true);
-
-      const response = await axios.get(
-        'http://localhost:3000/api/documents?page=1&limit=10',
-      );
-      setDocs(response.data.data);
+      axios
+        .get(`${SERVER_URL}documents?page=1&limit=20`)
+        .then((response) => {
+          const docReceived = response.data.data;
+          const docWithKey = docReceived.map((doc) => ({ ...doc, key: doc.id }));
+          setDocs(docWithKey);
+        })
+        .catch((error) => console.log(error));
       setLoading(false);
     };
     fetchDocs();
@@ -52,6 +75,7 @@ function App() {
               loading={loading}
               handleDocName={handleDocName}
               docName={docName}
+              addDoc={addDoc}
             />
           </Content>
         </Layout>
