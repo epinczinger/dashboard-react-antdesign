@@ -5,7 +5,9 @@ import {
 } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
-const Dashboard = ({ data, handleDocName, loading }) => {
+const Dashboard = ({
+  data, handleDocName, loading, addDoc,
+}) => {
   const [filteredInfo, setFilteredInfo] = useState(null);
   const { Title } = Typography;
 
@@ -92,7 +94,7 @@ const Dashboard = ({ data, handleDocName, loading }) => {
             {' '}
           </Col>
           <Col>
-            <Button type="primary" style={{ width: '100%' }}>
+            <Button type="primary" onClick={addDoc} style={{ width: '100%' }}>
               <PlusOutlined />
               Add new
             </Button>
@@ -135,10 +137,12 @@ Dashboard.defaultProps = {
   data: [],
   loading: false,
   handleDocName: () => {},
+  addDoc: () => {},
 };
 
 Dashboard.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
   handleDocName: PropTypes.func,
   loading: PropTypes.bool,
+  addDoc: PropTypes.func,
 };
