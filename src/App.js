@@ -35,25 +35,26 @@ function App() {
     axios
       .post(`${SERVER_URL}documents`, newDoc)
       .then((response) => {
-        setDocs([...docs, response.data]);
+        setDocs([...docs, { ...response.data, key: response.data.id }]);
       })
       .catch((error) => console.warn(error));
   };
 
+  const getDocs = () => {
+    setLoading(true);
+    axios
+      .get(`${SERVER_URL}documents?page=1&limit=20`)
+      .then((response) => {
+        const docReceived = response.data.data;
+        const docWithKey = docReceived.map((doc) => ({ ...doc, key: doc.id }));
+        setDocs(docWithKey);
+      })
+      .catch((error) => console.log(error));
+    setLoading(false);
+  };
+
   useEffect(() => {
-    const fetchDocs = async () => {
-      setLoading(true);
-      axios
-        .get(`${SERVER_URL}documents?page=1&limit=20`)
-        .then((response) => {
-          const docReceived = response.data.data;
-          const docWithKey = docReceived.map((doc) => ({ ...doc, key: doc.id }));
-          setDocs(docWithKey);
-        })
-        .catch((error) => console.log(error));
-      setLoading(false);
-    };
-    fetchDocs();
+    getDocs();
   }, []);
 
   return (
