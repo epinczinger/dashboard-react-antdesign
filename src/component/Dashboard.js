@@ -29,6 +29,7 @@ const Dashboard = ({ data, handleDocName, loading }) => {
       title: 'Document Name',
       dataIndex: 'name',
       key: 'name',
+      // eslint-disable-next-line react/display-name
       render: (name) => <Button>{name}</Button>,
     },
     {
