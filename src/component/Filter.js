@@ -1,5 +1,8 @@
-import React from "react";
-import { Radio, Select, Space, Typography } from "antd";
+import React from 'react';
+import PropTypes from 'prop-types';
+import {
+  Radio, Select, Space, Typography,
+} from 'antd';
 
 const Filter = ({ status, handleStatus }) => {
   const { Title } = Typography;
@@ -23,16 +26,27 @@ const Filter = ({ status, handleStatus }) => {
     <div>
       <Title>Filters</Title>
       <Space direction="vertical">
-        <Select defaultValue="Adress" className="filterEl"></Select>
-        <Select defaultValue="Date" className="filterEl"></Select>{" "}
+        <Select defaultValue="Adress" className="filterEl" />
+        <Select defaultValue="Date" className="filterEl" />
+        {' '}
         <Select defaultValue="Status" className="filterEl">
           {radio}
         </Select>
-        <Select defaultValue="Group" className="filterEl"></Select>
-        <Select defaultValue="Date Range" className="filterEl"></Select>
+        <Select defaultValue="Group" className="filterEl" />
+        <Select defaultValue="Date Range" className="filterEl" />
       </Space>
     </div>
   );
 };
 
 export default Filter;
+
+Filter.defaultProps = {
+  status: '',
+  handleStatus: () => {},
+};
+
+Filter.propTypes = {
+  status: PropTypes.string,
+  handleStatus: PropTypes.func,
+};
