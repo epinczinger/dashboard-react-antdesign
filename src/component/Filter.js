@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Radio, Select, Space, Typography } from "antd";
 
 const Filter = ({ status, handleStatus }) => {
