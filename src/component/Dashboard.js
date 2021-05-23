@@ -32,7 +32,7 @@ const Dashboard = ({
       dataIndex: 'name',
       key: 'name',
       // eslint-disable-next-line react/display-name
-      render: (name) => <Button>{name}</Button>,
+      render: (name) => <Button type="link">{name}</Button>,
     },
     {
       title: 'Group',
@@ -74,12 +74,6 @@ const Dashboard = ({
 
   return (
     <div>
-      <div style={{ backgroundColor: 'white', padding: '16px' }}>
-        <div>Breadcrumbs</div>
-        <div>
-          <Title level={2}>Document Browser</Title>
-        </div>
-      </div>
       <div
         style={{ backgroundColor: 'white', margin: '16px', padding: '16px' }}
       >
