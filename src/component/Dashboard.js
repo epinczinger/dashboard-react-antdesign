@@ -51,9 +51,8 @@ const Dashboard = ({
         { text: 'Delivered', value: 'delivered' },
       ],
       filteredValue: filtered.status || null,
-      onFilter: (value, record) => {
-        record.status.includes(value);
-      },
+      onFilter: (value, record) => record.status.toLowerCase().indexOf(value) === 0,
+      sorter: (a, b) => a.status.length - b.status.length,
     },
     {
       title: 'Date modified',

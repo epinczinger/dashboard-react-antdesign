@@ -45,7 +45,7 @@ const Document = () => {
   const getDocs = () => {
     setLoading(true);
     axios
-      .get(`${SERVER_URL}documents?page=1&limit=20`)
+      .get(`${SERVER_URL}documents?page=1&limit=50`)
       .then((response) => {
         const docReceived = response.data.data;
         const docWithKey = docReceived.map((doc) => ({ ...doc, key: doc.id }));
